@@ -1,6 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
 import { z } from "zod";
-import { getAdminSupabase } from "../../../../src/lib/supabaseAdmin";
+import { getAdminSupabase } from "@/lib/supabaseAdmin";
 
 const Input = z.object({
   resumeText: z.string().min(50),
