@@ -1,10 +1,10 @@
-import { auth as clerkAuth } from "@clerk/nextjs";
+import { auth as clerkAuth } from "@clerk/nextjs/server";
 import { z as Z } from "zod";
 
 const InputR = Z.object({ documentId: Z.string().uuid().optional(), text: Z.string().min(10) });
 
 export async function POST(req: Request) {
-  const { userId } = clerkAuth();
+  const { userId } = await clerkAuth();
   if (!userId) return new Response("Unauthorized", { status: 401 });
   const body = await req.json();
   const parsed = InputR.safeParse(body);

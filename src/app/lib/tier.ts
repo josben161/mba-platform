@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 import { supabase } from "./profile";
 
 export async function getTier(clerkUserId: string): Promise<"free" | "plus" | "pro"> {

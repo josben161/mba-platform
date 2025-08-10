@@ -1,8 +1,8 @@
 import React from "react";
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 
 export default async function EssaysPage() {
-  const { userId } = auth();
+  const { userId } = await auth();
   if (!userId) return null;
 
   return (
@@ -31,7 +31,7 @@ export default async function EssaysPage() {
               <select className="w-full rounded border p-3">
                 <option>Select a prompt...</option>
                 <option>Why MBA? Why now? Why this school?</option>
-                <option>Describe a significant challenge you've faced...</option>
+                <option>Describe a significant challenge you'apos;ve faced...</option>
                 <option>What are your short and long-term career goals?</option>
               </select>
             </div>

@@ -1,8 +1,8 @@
 import React from "react";
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 
 export default async function CoachPage() {
-  const { userId } = auth();
+  const { userId } = await auth();
   if (!userId) return null;
 
   return (
@@ -25,7 +25,7 @@ export default async function CoachPage() {
               <div className="w-8 h-8 bg-gray-300 rounded-full flex-shrink-0"></div>
               <div className="flex-1">
                 <div className="bg-gray-100 rounded-lg p-3">
-                  <p className="text-sm">Hi! I'm Sarah, your MBA admissions coach. How can I help you today?</p>
+                  <p className="text-sm">Hi! II'apos;mapos;m Sarah, your MBA admissions coach. How can I help you today?</p>
                 </div>
                 <p className="text-xs text-gray-500 mt-1">2:30 PM</p>
               </div>
@@ -34,7 +34,7 @@ export default async function CoachPage() {
             <div className="flex space-x-3 justify-end">
               <div className="flex-1 text-right">
                 <div className="bg-black text-white rounded-lg p-3 inline-block">
-                  <p className="text-sm">I'm working on my Harvard essay and could use some feedback on my approach.</p>
+                  <p className="text-sm">II'apos;mapos;m working on my Harvard essay and could use some feedback on my approach.</p>
                 </div>
                 <p className="text-xs text-gray-500 mt-1">2:32 PM</p>
               </div>
@@ -45,7 +45,7 @@ export default async function CoachPage() {
               <div className="w-8 h-8 bg-gray-300 rounded-full flex-shrink-0"></div>
               <div className="flex-1">
                 <div className="bg-gray-100 rounded-lg p-3">
-                  <p className="text-sm">Great! I'd love to help. What's your current draft looking like? Also, have you thought about booking a 1:1 session to dive deeper?</p>
+                  <p className="text-sm">Great! II'apos;dapos;d love to help. What'apos;s your current draft looking like? Also, have you thought about booking a 1:1 session to dive deeper?</p>
                 </div>
                 <p className="text-xs text-gray-500 mt-1">2:33 PM</p>
               </div>

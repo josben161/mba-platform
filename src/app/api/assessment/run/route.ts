@@ -1,4 +1,4 @@
-import { auth } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
 import { z } from "zod";
 import { supabase } from "@/lib/profile";
 
@@ -11,7 +11,7 @@ const Input = z.object({
 });
 
 export async function POST(req: Request) {
-  const { userId } = auth();
+  const { userId } = await auth();
   if (!userId) return new Response("Unauthorized", { status: 401 });
   const body = await req.json();
   const parsed = Input.safeParse(body);

@@ -9,12 +9,12 @@ export async function POST(req: NextRequest) {
   let event: Stripe.Event;
   try {
     event = stripe.webhooks.constructEvent(buf, sig, process.env.STRIPE_WEBHOOK_SECRET!);
-  } catch (e: any) {
-    return new Response(`Webhook Error: ${e.message}`, { status: 400 });
+  } catch (e: unknown) {
+    return new Response(`Webhook Error: ${e instanceof Error ? e.message : "Unknown error"}`, { status: 400 });
   }
 
   if (event.type === "checkout.session.completed" || event.type === "customer.subscription.updated") {
-    const obj: any = event.data.object;
+    const obj = event.data.object as any;
     const clerkUserId = obj?.metadata?.clerkUserId; // pass when creating checkout session
     const tier = obj?.metadata?.tier || obj?.items?.data?.[0]?.plan?.nickname?.toLowerCase() || "plus";
     const customer = obj?.customer as string | undefined;

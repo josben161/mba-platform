@@ -1,8 +1,8 @@
-import { auth, currentUser } from "@clerk/nextjs";
+import { auth, currentUser } from "@clerk/nextjs/server";
 import { ensureProfile } from "@/lib/profile";
 
 export default async function Dashboard() {
-  const { userId } = auth();
+  const { userId } = await auth();
   if (!userId) return null;
   const user = await currentUser();
   await ensureProfile({ clerkUserId: userId, email: user?.emailAddresses?.[0]?.emailAddress || "", name: user?.firstName || undefined });
