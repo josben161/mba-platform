@@ -1,6 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
 import { z } from "zod";
-import { supabase } from "@/lib/profile";
+import { getAdminSupabase } from "@/lib/supabaseAdmin";
 
 const Input = z.object({
   resumeText: z.string().min(50),
@@ -22,7 +22,14 @@ export async function POST(req: Request) {
     gaps: ["Math brushup"],
     timeline: ["Book quant refresher in 2 weeks"],
   };
-  const profile = await supabase.from("profiles").select("id").eq("clerk_user_id", userId).single();
+
+  const supabase = getAdminSupabase();
+  const profile = await supabase
+    .from("profiles")
+    .select("id")
+    .eq("clerk_user_id", userId)
+    .single();
+
   const { data, error } = await supabase
     .from("assessments")
     .insert({ user_id: profile.data!.id, inputs: parsed.data, result })
